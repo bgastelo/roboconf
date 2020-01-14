@@ -29,7 +29,11 @@ function roboconf-bundler {
   # Assumes rvm
   # On Jan 3, 2019, bundler was updated to 2.0.0.  Can't go there yet, so specifically demand the
   # old until we can figure out what to do.
-  gem install bundler -v 1.17.3 --no-rdoc --no-ri
+  if [[ $(gem --version 2>/dev/null) =~ '^2.*' ]]; then
+    gem install bundler -v 1.17.3 --no-rdoc --no-ri
+  else
+    gem install bundler -v 1.17.3 --no-document
+  fi
   bundle install $opts
 }
 
